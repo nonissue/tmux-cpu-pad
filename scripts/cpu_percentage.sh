@@ -10,7 +10,7 @@ print_cpu_percentage() {
 		if is_linux_iostat; then
 			iostat -c 1 2 | sed '/^\s*$/d' | tail -n 1 | awk '{usage=100-$NF} END {printf("%3.1f%%", usage)}' | sed 's/,/./'
 		elif is_osx; then
-			iostat -c 2 disk0 | sed '/^\s*$/d' | tail -n 1 | awk '{usage=100-$6} END {printf("%003.1f%%", usage)}' | sed 's/,/./'
+			iostat -c 2 disk0 | sed '/^\s*$/d' | tail -n 1 | awk '{usage=100-$6} END {printf("%02.0f%%", usage)}' | sed 's/,/./'
 		elif is_freebsd || is_openbsd; then
 			iostat -c 2 | sed '/^\s*$/d' | tail -n 1 | awk '{usage=100-$NF} END {printf("%3.1f%%", usage)}' | sed 's/,/./'
 		else
